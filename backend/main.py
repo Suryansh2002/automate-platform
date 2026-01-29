@@ -13,7 +13,7 @@ async def continous_check():
     while lifespan_alive:
         if Storage["instagram_token"] is not None:
             await check_new_responses(Storage["instagram_token"])
-        await asyncio.sleep(5)
+        await asyncio.sleep(4)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):

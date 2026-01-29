@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { MarkdownRenderer } from '@/components/markdown';
 
-export function ChatPage() {
+export default function ChatPage() {
   const [messages, setMessages] = useState([
     { text: "Hi! I'm a chatbot.", sender: 'bot' }
   ]);
