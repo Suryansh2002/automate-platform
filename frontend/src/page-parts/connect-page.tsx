@@ -17,7 +17,7 @@ const triggerTokenFetch = async (extensionId:string, router: AppRouterInstance) 
       if (res.ok) {
         const data = await res.json();
         localStorage.setItem("session_id", data.session_id);
-        router.refresh();
+        window.location.reload();
       } else {
         alert("Failed to connect Instagram account on the server.");
       }
