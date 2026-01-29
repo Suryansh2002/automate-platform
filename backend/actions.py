@@ -74,7 +74,7 @@ async def check_new_responses(session_id: str) -> str|None:
 
             await unread_users.click()
             await wait_load(page)
-            await asyncio.sleep(1)
+            await asyncio.sleep(3)
             if page_url == "https://www.instagram.com/direct/requests/":
                 await page.get_by_role("button", name="Accept").click(timeout=2000)
                 await wait_load(page)
@@ -119,3 +119,4 @@ async def read_and_respond_to_messages(page: Page):
     await message_box.type(message, delay=100)
     await page.keyboard.press("Enter")
     await page.wait_for_load_state("domcontentloaded")
+    await asyncio.sleep(3)
