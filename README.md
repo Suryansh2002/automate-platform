@@ -3,9 +3,9 @@
 ## STEPS TO RUN
 
 1) Install python and poetry and run backend with poetry using
-    `poetry install` and `poetry run python run.py`
+    `poetry install`; `playwright install`; and `poetry run python run.py`
 
-2) Install nextjs using pnpm and run using `pnpm install` and `pnpm dev`
+2) Install nodejs on your system and Use pnpm/npm and run using `pnpm install` and `pnpm run dev`
 
 1) Make sure you are logged in on instagram on your pc
 
