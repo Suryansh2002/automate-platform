@@ -11,6 +11,8 @@
 
 2) Donwload and Install the extensions on your browswer
 
+3) Find the extension ID in your chrome://extensions and replace the hard coded extension ID in `frontend/src/pages/connect-page.tsx`. This is due to the fact that project is not deployed in production yet.
+
 3) Use Chat to send messages to people and AI will also automatically to incoming messages.
 
 
