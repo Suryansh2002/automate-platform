@@ -5,7 +5,7 @@
   "permissions": ["cookies"],
   "host_permissions": ["https://*.linkedin.com/*", "https://*.instagram.com/*"],
   "externally_connectable": {
-    "matches": ["http://localhost:3000/*", "https://automate-platform.appkit.site"]
+    "matches": ["http://localhost:3000/*", "https://automate-platform.appkit.site/*"]
   },
   "background": {
     "service_worker": "background.js"
