@@ -35,8 +35,7 @@ async def send_instagram_message(*, session_id: str, author_username: str = "ins
         try:
             await message_box.wait_for(state="visible", timeout=6000)
         except Exception:
-            print("Private account or blocked.")
-            return
+            return "Private account or blocked."
         await message_box.click()
         await message_box.type(message, delay=100)
         await page.keyboard.press("Enter")

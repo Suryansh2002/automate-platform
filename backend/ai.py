@@ -71,10 +71,12 @@ async def get_ai_response(prompt: str) -> str|None:
                 if Storage["instagram_token"] is None:
                     return "Your Instagram account is not connected !"
                 
-                await send_instagram_message(
+                msg = await send_instagram_message(
                     session_id=Storage["instagram_token"] or "",
                     author_username=args["username"],
                     message=args["message"]
                 )
+                if msg:
+                    return msg
 
                 return f"Message sent to {args['username']} via Instagram\nMessage Content: {args['message']}"
