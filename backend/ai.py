@@ -31,7 +31,6 @@ tools: list[dict[str, Any]] = [
 ]
 
 async def respond_to_new_messages(message: str) -> str:
-    print(message)
     response = await asyncio.to_thread(
         client.responses.create,
         model="gpt-5",
