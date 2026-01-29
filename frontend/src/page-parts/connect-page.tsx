@@ -2,12 +2,12 @@
 import { useState, useEffect } from "react";
 import { useRouter, } from "next/navigation";
 import type { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
-
+import { backendUrl } from "@/env";
 
 const triggerTokenFetch = async (extensionId:string, router: AppRouterInstance) => {
   chrome.runtime.sendMessage(extensionId, { action: "GET_TOKEN" }, async (response) => {
     if (response.success) {
-      const res =await fetch("http://localhost:8000/set-token/", {
+      const res =await fetch(`${backendUrl}/set-token/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

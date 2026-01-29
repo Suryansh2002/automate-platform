@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { MarkdownRenderer } from '@/components/markdown';
+import { backendUrl } from '@/env';
 
 export default function ChatPage() {
   const [messages, setMessages] = useState([
@@ -16,7 +17,7 @@ export default function ChatPage() {
     setMessages([...messages, { text: input, sender: 'user' }]);
     setInput('');
 
-    const response = await fetch('http://localhost:8000/ai-message/', {
+    const response = await fetch(`${backendUrl}/ai-message/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
