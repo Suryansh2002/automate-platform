@@ -15,6 +15,8 @@ const triggerTokenFetch = async (extensionId:string, router: AppRouterInstance) 
         body: JSON.stringify({ new_token: response.token, type: "instagram" }),
       });
       if (res.ok) {
+        const data = await res.json();
+        localStorage.setItem("session_id", data.session_id);
         router.refresh();
       } else {
         alert("Failed to connect Instagram account on the server.");

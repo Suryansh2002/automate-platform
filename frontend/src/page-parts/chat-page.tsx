@@ -22,7 +22,7 @@ export default function ChatPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ prompt: input }),
+        body: JSON.stringify({ prompt: input , session_id: localStorage.getItem("session_id") || "" }),
     })
     const responseText = await response.text();
 

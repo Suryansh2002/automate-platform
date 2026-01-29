@@ -4,7 +4,7 @@ import asyncio
 from openai import OpenAI
 from typing import Any
 from actions import send_instagram_message
-from token_storage import Storage
+from token_storage import Sessions
 
 client = OpenAI(api_key=os.getenv("OPENAI_TOKEN"))
 
@@ -49,7 +49,7 @@ async def respond_to_new_messages(message: str) -> str:
 
 
 
-async def get_ai_response(prompt: str) -> str|None:
+async def get_ai_response(session_id: str, prompt: str) -> str|None:
     response = await asyncio.to_thread(
         client.responses.create,
         model="gpt-5",
@@ -67,11 +67,11 @@ async def get_ai_response(prompt: str) -> str|None:
         if item.type == "function_call":
             if item.name == "send_instagram_message":
                 args = json.loads(item.arguments)
-                if Storage["instagram_token"] is None:
+                if Sessions[session_id]["instagram_token"] is None:
                     return "Your Instagram account is not connected !"
                 
                 msg = await send_instagram_message(
-                    session_id=Storage["instagram_token"] or "",
+                    session_id=Sessions[session_id]["instagram_token"] or "",
                     author_username=args["username"],
                     message=args["message"]
                 )
