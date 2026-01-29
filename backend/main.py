@@ -14,8 +14,10 @@ lifespan_alive = True
 async def continous_check():
     while lifespan_alive:
         await asyncio.sleep(1)
+        dones: set[str] = set()
         for _, value in Sessions.copy().items():
-            if value["instagram_token"] is not None:
+            if (value["instagram_token"] is not None) and (value["instagram_token"] not in dones):
+                dones.add(value["instagram_token"])
                 await check_new_responses(value["instagram_token"])
             await asyncio.sleep(random.randint(4, 8))
 
