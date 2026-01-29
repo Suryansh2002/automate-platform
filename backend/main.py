@@ -1,4 +1,5 @@
 import asyncio
+import random
 from fastapi import FastAPI, Body
 from fastapi.middleware.cors import CORSMiddleware
 from ai import get_ai_response
@@ -13,7 +14,7 @@ async def continous_check():
     while lifespan_alive:
         if Storage["instagram_token"] is not None:
             await check_new_responses(Storage["instagram_token"])
-        await asyncio.sleep(4)
+        await asyncio.sleep(random.randint(5, 10))
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
