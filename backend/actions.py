@@ -118,5 +118,5 @@ async def read_and_respond_to_messages(page: Page):
     await message_box.click()
     await message_box.type(message, delay=100)
     await page.keyboard.press("Enter")
+    await asyncio.sleep(1)
     await page.wait_for_load_state("domcontentloaded")
-    await asyncio.sleep(3)
