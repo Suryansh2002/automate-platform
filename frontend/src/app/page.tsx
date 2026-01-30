@@ -24,7 +24,7 @@ export default function HomePage() {
   }, []);
 
   if (connected === null) {
-    return <div>Loading...</div>;
+    return <div></div>;
   }
 
   return connected ? <ChatPage /> : <ConnectPage />;

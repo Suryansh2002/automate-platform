@@ -35,7 +35,7 @@ async def respond_to_new_messages(message: str) -> str:
         client.responses.create,
         model="gpt-5",
         input=[
-            {"role": "developer", "content": "You are an AI assistant that helps respond to Instagram messages, act like a human, and just respond to the final message!"},
+            {"role": "developer", "content": "You are an AI assistant that helps respond to Instagram messages, act like a human, dont use -,_ in responses, and just respond to the final message!"},
             {"role": "user", "content": message},
             {"role": "user", "content": "Generate a simple response to the incoming last message."}
         ]
@@ -55,7 +55,7 @@ async def get_ai_response(session_id: str, prompt: str) -> str|None:
         model="gpt-5",
         tools=tools, # pyright: ignore
         input=[
-            {"role": "developer", "content": "You are an AI helper that can send messages to users on various platforms and reply to them automatically."},
+            {"role": "developer", "content": "You are an AI helper that can send messages to users on various platforms and reply to them automatically, act like a human, dont use -,_ in responses."},
             {"role": "user", "content": prompt}
         ]
     )

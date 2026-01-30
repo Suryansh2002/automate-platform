@@ -1,4 +1,5 @@
 import asyncio
+from time import time
 import uuid
 import random
 from fastapi import FastAPI, Body
@@ -15,10 +16,16 @@ async def continous_check():
     while lifespan_alive:
         await asyncio.sleep(1)
         dones: set[str] = set()
-        for _, value in Sessions.copy().items():
-            if (value["instagram_token"] is not None) and (value["instagram_token"] not in dones):
-                dones.add(value["instagram_token"])
-                await check_new_responses(value["instagram_token"])
+        for key, value in Sessions.copy().items():
+            if value["valid_till"] < time():
+                del Sessions[key]
+                continue
+            if value["instagram_token"] is None:
+                continue
+            if value["instagram_token"] in dones:
+                continue
+            dones.add(value["instagram_token"])
+            await check_new_responses(value["instagram_token"])
             await asyncio.sleep(random.randint(4, 8))
 
 @asynccontextmanager
@@ -46,7 +53,7 @@ app.add_middleware(
 async def set_token(new_token: str = Body(..., embed=True), type: str = Body(..., embed=True)):
     session_id = str(uuid.uuid4())
     if type == "instagram":
-        Sessions[session_id] = {"instagram_token": new_token}
+        Sessions[session_id] = {"instagram_token": new_token, "valid_till": time() + 24 * 60 * 60}
     return {"message": "Token set successfully", "session_id": session_id}
 
 
