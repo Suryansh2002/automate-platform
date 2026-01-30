@@ -33,7 +33,7 @@ async def continous_check():
             except Exception:
                 traceback.print_exc()
 
-            await asyncio.sleep(random.randint(4, 8))
+            await asyncio.sleep(random.randint(3, 6))
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):

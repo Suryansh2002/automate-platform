@@ -74,7 +74,7 @@ async def check_new_responses(session_id: str) -> str|None:
 
             await unread_users.click()
             await wait_load(page)
-            await asyncio.sleep(3)
+            await asyncio.sleep(2)
             if page_url == "https://www.instagram.com/direct/requests/":
                 await page.get_by_role("button", name="Accept").click(timeout=2000)
                 await wait_load(page)
