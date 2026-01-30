@@ -60,7 +60,7 @@ app.add_middleware(
 async def set_token(new_token: str = Body(..., embed=True), type: str = Body(..., embed=True)):
     session_id = str(uuid.uuid4())
     if type == "instagram":
-        Sessions[session_id] = {"instagram_token": new_token, "valid_till": time() + 24 * 60 * 60}
+        Sessions[session_id] = {"instagram_token": new_token, "valid_till": time() + 12 * 60 * 60}
     return {"message": "Token set successfully", "session_id": session_id}
 
 @app.post("/unset-token/")
