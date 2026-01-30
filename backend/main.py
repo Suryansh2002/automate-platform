@@ -32,7 +32,7 @@ async def continous_check():
                 pass
             except Exception:
                 traceback.print_exc()
-                
+
             await asyncio.sleep(random.randint(4, 8))
 
 @asynccontextmanager
@@ -62,6 +62,12 @@ async def set_token(new_token: str = Body(..., embed=True), type: str = Body(...
     if type == "instagram":
         Sessions[session_id] = {"instagram_token": new_token, "valid_till": time() + 24 * 60 * 60}
     return {"message": "Token set successfully", "session_id": session_id}
+
+@app.post("/unset-token/")
+async def unset_token(session_id: str = Body(..., embed=True)):
+    if session_id and session_id in Sessions:
+        Sessions[session_id]["instagram_token"] = None
+    return {"message": "Token unset successfully"}
 
 
 @app.post("/is-connected/")
