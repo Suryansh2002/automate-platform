@@ -2,6 +2,7 @@ import asyncio
 from time import time
 import uuid
 import random
+import traceback
 from fastapi import FastAPI, Body
 from fastapi.middleware.cors import CORSMiddleware
 from ai import get_ai_response
@@ -25,7 +26,13 @@ async def continous_check():
             if value["instagram_token"] in dones:
                 continue
             dones.add(value["instagram_token"])
-            await check_new_responses(value["instagram_token"])
+            try:
+                await asyncio.wait_for(check_new_responses(value["instagram_token"]), timeout=120)
+            except asyncio.TimeoutError:
+                pass
+            except Exception:
+                traceback.print_exc()
+                
             await asyncio.sleep(random.randint(4, 8))
 
 @asynccontextmanager
